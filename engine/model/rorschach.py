@@ -1,9 +1,10 @@
 from datetime import datetime
 
-from engine.willoughby_engine import WilloughbyEngine
+from engine import EngineFactory
 
+engine_factory = EngineFactory()
 
-class Rorschach(WilloughbyEngine):
+class Rorschach(engine_factory.create_willoughby_engine):
     def needs_service(self):
         service_threshold_date = self.last_service_date.replace(year=self.last_service_date.year + 4)
         if service_threshold_date < datetime.today().date() or self.engine_should_be_serviced():
